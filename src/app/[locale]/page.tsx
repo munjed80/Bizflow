@@ -1,8 +1,8 @@
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
 
-export default function HomePage({ params }: { params: Promise<{ locale: string }> }) {
-  const t = useTranslations('common');
+export default async function HomePage() {
+  const t = await getTranslations('common');
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-500 to-purple-600">

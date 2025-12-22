@@ -10,7 +10,8 @@
     "customers": "Customers",
     "forms": "Forms",
     "automation": "Automation",
-    "settings": "Settings"
+    "settings": "Settings",
+    "home": "Home"
   },
   "auth": {
     "email": "Email",
@@ -22,12 +23,17 @@
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "emailPlaceholder": "your@email.com",
-    "passwordPlaceholder": "Enter password"
+    "passwordPlaceholder": "Enter password",
+    "missingEnv": "Supabase environment variables are missing."
   },
   "customer": {
     "title": "Customers",
+    "manageCustomers": "Manage your customer relationships",
+    "description": "Add, search, edit, and track your customers in one place.",
     "addCustomer": "Add Customer",
     "editCustomer": "Edit Customer",
+    "createCustomer": "Create a new customer",
+    "updateCustomer": "Update customer",
     "deleteCustomer": "Delete Customer",
     "name": "Name",
     "email": "Email",
@@ -39,23 +45,52 @@
     "actions": "Actions",
     "edit": "Edit",
     "delete": "Delete",
+    "deleting": "Deleting...",
     "save": "Save",
     "cancel": "Cancel",
     "viewDetails": "View Details",
-    "customerDetails": "Customer Details"
+    "customerDetails": "Customer Details",
+    "searchPlaceholder": "Search by name, email, or company",
+    "noCustomers": "No customers found",
+    "missingEnv": "Supabase environment variables are missing."
   },
   "dashboard": {
     "title": "Dashboard",
     "totalCustomers": "Total Customers",
     "activeCustomers": "Active Customers",
     "recentCustomers": "Recent Customers",
-    "stats": "Statistics"
+    "stats": "Statistics",
+    "noCustomers": "No customers yet.",
+    "addFirstCustomer": "Add your first customer"
   },
   "forms": {
     "title": "Smart Forms",
+    "builderTitle": "Smart Form Builder",
+    "builderSubtitle": "Create simple forms and collect responses (MVP).",
     "createForm": "Create Form",
     "formName": "Form Name",
     "formDescription": "Form Description",
-    "required": "This field is required"
+    "formNamePlaceholder": "e.g. Onboarding Form",
+    "formDescriptionPlaceholder": "Short description for your form",
+    "fields": "Fields",
+    "addField": "Add field",
+    "fieldLabel": "Field label",
+    "fieldType": "Field type",
+    "text": "Text",
+    "number": "Number",
+    "email": "Email",
+    "textarea": "Textarea",
+    "required": "Required",
+    "remove": "Remove",
+    "saveForm": "Save form",
+    "saving": "Saving...",
+    "saved": "Form saved successfully",
+    "preview": "Preview",
+    "existingForms": "Existing forms",
+    "noForms": "No forms created yet.",
+    "comingSoon": "Dynamic automations and sharing are coming soon.",
+    "missingEnv": "Supabase environment variables are missing.",
+    "authRequired": "You need to be logged in to save forms.",
+    "newFieldLabel": "Field {index}"
   }
 }

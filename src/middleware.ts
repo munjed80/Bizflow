@@ -11,10 +11,15 @@ const intlMiddleware = createMiddleware({
 
 export async function middleware(request: NextRequest) {
   // Update Supabase session
-  const response = await updateSession(request);
-  
-  // Apply i18n middleware
-  return intlMiddleware(request);
+  const supabaseResponse = await updateSession(request);
+
+  // Apply i18n middleware and merge Supabase cookies
+  const intlResponse = intlMiddleware(request);
+  supabaseResponse.cookies.getAll().forEach((cookie) => {
+    intlResponse.cookies.set(cookie);
+  });
+
+  return intlResponse;
 }
 
 export const config = {

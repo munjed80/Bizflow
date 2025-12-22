@@ -10,7 +10,8 @@
     "customers": "العملاء",
     "forms": "النماذج",
     "automation": "الأتمتة",
-    "settings": "الإعدادات"
+    "settings": "الإعدادات",
+    "home": "الرئيسية"
   },
   "auth": {
     "email": "البريد الإلكتروني",
@@ -22,12 +23,17 @@
     "signIn": "تسجيل الدخول",
     "signUp": "إنشاء حساب",
     "emailPlaceholder": "your@email.com",
-    "passwordPlaceholder": "أدخل كلمة المرور"
+    "passwordPlaceholder": "أدخل كلمة المرور",
+    "missingEnv": "بيانات إعداد Supabase غير متوفرة."
   },
   "customer": {
     "title": "العملاء",
+    "manageCustomers": "إدارة علاقات العملاء",
+    "description": "أضف وابحث وعدّل عملاءك في مكان واحد.",
     "addCustomer": "إضافة عميل",
     "editCustomer": "تعديل العميل",
+    "createCustomer": "إنشاء عميل جديد",
+    "updateCustomer": "تحديث العميل",
     "deleteCustomer": "حذف العميل",
     "name": "الاسم",
     "email": "البريد الإلكتروني",
@@ -39,23 +45,52 @@
     "actions": "الإجراءات",
     "edit": "تعديل",
     "delete": "حذف",
+    "deleting": "جار الحذف...",
     "save": "حفظ",
     "cancel": "إلغاء",
     "viewDetails": "عرض التفاصيل",
-    "customerDetails": "تفاصيل العميل"
+    "customerDetails": "تفاصيل العميل",
+    "searchPlaceholder": "ابحث بالاسم أو البريد أو الشركة",
+    "noCustomers": "لا يوجد عملاء",
+    "missingEnv": "بيانات إعداد Supabase غير متوفرة."
   },
   "dashboard": {
     "title": "لوحة التحكم",
     "totalCustomers": "إجمالي العملاء",
     "activeCustomers": "العملاء النشطون",
     "recentCustomers": "العملاء الجدد",
-    "stats": "الإحصائيات"
+    "stats": "الإحصائيات",
+    "noCustomers": "لا يوجد عملاء بعد.",
+    "addFirstCustomer": "أضف أول عميل لك"
   },
   "forms": {
     "title": "النماذج الذكية",
+    "builderTitle": "منشئ النماذج الذكية",
+    "builderSubtitle": "أنشئ نماذج بسيطة واجمع الردود (نسخة أولية).",
     "createForm": "إنشاء نموذج",
     "formName": "اسم النموذج",
     "formDescription": "وصف النموذج",
-    "required": "هذا الحقل مطلوب"
+    "formNamePlaceholder": "مثال: نموذج تسجيل",
+    "formDescriptionPlaceholder": "وصف مختصر للنموذج",
+    "fields": "الحقول",
+    "addField": "إضافة حقل",
+    "fieldLabel": "عنوان الحقل",
+    "fieldType": "نوع الحقل",
+    "text": "نص",
+    "number": "رقم",
+    "email": "بريد إلكتروني",
+    "textarea": "مربع نصي",
+    "required": "مطلوب",
+    "remove": "حذف",
+    "saveForm": "حفظ النموذج",
+    "saving": "جار الحفظ...",
+    "saved": "تم حفظ النموذج بنجاح",
+    "preview": "معاينة",
+    "existingForms": "النماذج الحالية",
+    "noForms": "لا توجد نماذج حتى الآن.",
+    "comingSoon": "المزيد من الأتمتة والمشاركة قادمة قريباً.",
+    "missingEnv": "بيانات إعداد Supabase غير متوفرة.",
+    "authRequired": "يجب تسجيل الدخول لحفظ النماذج.",
+    "newFieldLabel": "حقل {index}"
   }
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { createClient } from '@/lib/supabase/client';
@@ -14,11 +14,31 @@ export default function RegisterPage({ params }: { params: Promise<{ locale: str
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  useEffect(() => {
+    if (!supabaseUrl || !supabaseKey) return;
+
+    const supabase = createClient();
+    supabase.auth.getUser().then(async ({ data }) => {
+      if (data.user) {
+        const { locale } = await params;
+        router.replace(`/${locale}/dashboard`);
+      }
+    });
+  }, [params, router, supabaseKey, supabaseUrl]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+
+    if (!supabaseUrl || !supabaseKey) {
+      setError(t('missingEnv'));
+      setLoading(false);
+      return;
+    }
 
     const supabase = createClient();
     const { error } = await supabase.auth.signUp({

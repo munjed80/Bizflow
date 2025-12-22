@@ -1,14 +1,17 @@
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 
-export default async function DashboardPage() {
+export default async function DashboardPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('./login');
+    redirect(`/${locale}/login`);
   }
 
   const t = await getTranslations('dashboard');
@@ -100,7 +103,12 @@ export default async function DashboardPage() {
               ))}
             </ul>
           ) : (
-            <p className="px-4 py-4 text-sm text-gray-500">No customers yet</p>
+            <div className="px-4 py-4 text-sm text-gray-500">
+              <p>{t('noCustomers')}</p>
+              <Link href={`/${locale}/dashboard/customers`} className="text-indigo-600 hover:text-indigo-700">
+                {t('addFirstCustomer')}
+              </Link>
+            </div>
           )}
         </div>
       </div>
