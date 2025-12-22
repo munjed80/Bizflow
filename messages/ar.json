@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "بيزفلو",
+    "language": "اللغة",
+    "logout": "تسجيل الخروج",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "welcome": "مرحباً",
+    "dashboard": "لوحة التحكم",
+    "customers": "العملاء",
+    "forms": "النماذج",
+    "automation": "الأتمتة",
+    "settings": "الإعدادات"
+  },
+  "auth": {
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "loginTitle": "تسجيل الدخول إلى بيزفلو",
+    "registerTitle": "إنشاء حساب جديد",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "signIn": "تسجيل الدخول",
+    "signUp": "إنشاء حساب",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "أدخل كلمة المرور"
+  },
+  "customer": {
+    "title": "العملاء",
+    "addCustomer": "إضافة عميل",
+    "editCustomer": "تعديل العميل",
+    "deleteCustomer": "حذف العميل",
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "phone": "الهاتف",
+    "company": "الشركة",
+    "status": "الحالة",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "actions": "الإجراءات",
+    "edit": "تعديل",
+    "delete": "حذف",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "viewDetails": "عرض التفاصيل",
+    "customerDetails": "تفاصيل العميل"
+  },
+  "dashboard": {
+    "title": "لوحة التحكم",
+    "totalCustomers": "إجمالي العملاء",
+    "activeCustomers": "العملاء النشطون",
+    "recentCustomers": "العملاء الجدد",
+    "stats": "الإحصائيات"
+  },
+  "forms": {
+    "title": "النماذج الذكية",
+    "createForm": "إنشاء نموذج",
+    "formName": "اسم النموذج",
+    "formDescription": "وصف النموذج",
+    "required": "هذا الحقل مطلوب"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "BizFlow",
+    "language": "Taal",
+    "logout": "Uitloggen",
+    "login": "Inloggen",
+    "register": "Registreren",
+    "welcome": "Welkom",
+    "dashboard": "Dashboard",
+    "customers": "Klanten",
+    "forms": "Formulieren",
+    "automation": "Automatisering",
+    "settings": "Instellingen"
+  },
+  "auth": {
+    "email": "E-mail",
+    "password": "Wachtwoord",
+    "loginTitle": "Inloggen bij BizFlow",
+    "registerTitle": "Account Aanmaken",
+    "noAccount": "Nog geen account?",
+    "hasAccount": "Al een account?",
+    "signIn": "Inloggen",
+    "signUp": "Registreren",
+    "emailPlaceholder": "uw@email.com",
+    "passwordPlaceholder": "Voer wachtwoord in"
+  },
+  "customer": {
+    "title": "Klanten",
+    "addCustomer": "Klant Toevoegen",
+    "editCustomer": "Klant Bewerken",
+    "deleteCustomer": "Klant Verwijderen",
+    "name": "Naam",
+    "email": "E-mail",
+    "phone": "Telefoon",
+    "company": "Bedrijf",
+    "status": "Status",
+    "active": "Actief",
+    "inactive": "Inactief",
+    "actions": "Acties",
+    "edit": "Bewerken",
+    "delete": "Verwijderen",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "viewDetails": "Details Bekijken",
+    "customerDetails": "Klant Details"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalCustomers": "Totaal Klanten",
+    "activeCustomers": "Actieve Klanten",
+    "recentCustomers": "Recente Klanten",
+    "stats": "Statistieken"
+  },
+  "forms": {
+    "title": "Slimme Formulieren",
+    "createForm": "Formulier Maken",
+    "formName": "Formulier Naam",
+    "formDescription": "Formulier Beschrijving",
+    "required": "Dit veld is verplicht"
+  }
+}
