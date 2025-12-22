@@ -1,0 +1,61 @@
+{
+  "common": {
+    "appName": "BizFlow",
+    "language": "Language",
+    "logout": "Logout",
+    "login": "Login",
+    "register": "Register",
+    "welcome": "Welcome",
+    "dashboard": "Dashboard",
+    "customers": "Customers",
+    "forms": "Forms",
+    "automation": "Automation",
+    "settings": "Settings"
+  },
+  "auth": {
+    "email": "Email",
+    "password": "Password",
+    "loginTitle": "Login to BizFlow",
+    "registerTitle": "Create Account",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "emailPlaceholder": "your@email.com",
+    "passwordPlaceholder": "Enter password"
+  },
+  "customer": {
+    "title": "Customers",
+    "addCustomer": "Add Customer",
+    "editCustomer": "Edit Customer",
+    "deleteCustomer": "Delete Customer",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "company": "Company",
+    "status": "Status",
+    "active": "Active",
+    "inactive": "Inactive",
+    "actions": "Actions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "viewDetails": "View Details",
+    "customerDetails": "Customer Details"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "totalCustomers": "Total Customers",
+    "activeCustomers": "Active Customers",
+    "recentCustomers": "Recent Customers",
+    "stats": "Statistics"
+  },
+  "forms": {
+    "title": "Smart Forms",
+    "createForm": "Create Form",
+    "formName": "Form Name",
+    "formDescription": "Form Description",
+    "required": "This field is required"
+  }
+}
