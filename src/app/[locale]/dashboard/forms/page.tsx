@@ -1,33 +1,36 @@
 import { redirect } from 'next/navigation';
-import { createClient } from '@/lib/supabase/server';
 import { getTranslations } from 'next-intl/server';
+import { createClient } from '@/lib/supabase/server';
+import FormBuilder from '@/components/FormBuilder';
+import type { SmartForm } from '@/types';
 
-export default async function FormsPage() {
+export default async function FormsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
 
   if (!user) {
-    redirect('../login');
+    redirect(`/${locale}/login`);
   }
 
   const t = await getTranslations('forms');
 
-  return (
-    <div className="px-4 py-6 sm:px-0">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">{t('title')}</h1>
-        <button
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
-        >
-          {t('createForm')}
-        </button>
-      </div>
+  const { data: forms } = await supabase
+    .from('forms')
+    .select('*')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
 
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg p-6">
-        <p className="text-gray-500 text-center">
-          Smart forms feature - Coming soon! This will allow you to create dynamic forms for data collection.
-        </p>
+  return (
+    <div className="mx-auto max-w-7xl space-y-6">
+      <div className="space-y-1">
+        <p className="text-sm uppercase tracking-wide text-indigo-600 dark:text-indigo-300">{t('title')}</p>
+        <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">{t('builderTitle')}</h1>
+        <p className="text-sm text-gray-600 dark:text-gray-300">{t('comingSoon')}</p>
       </div>
+      <FormBuilder existingForms={(forms as SmartForm[]) ?? []} userEmail={user.email} />
     </div>
   );
 }

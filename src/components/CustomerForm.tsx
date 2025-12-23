@@ -21,6 +21,7 @@ export default function CustomerForm({ customer, locale }: CustomerFormProps) {
   const t = useTranslations('customer');
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: customer?.name || '',
     email: customer?.email || '',
@@ -32,12 +33,20 @@ export default function CustomerForm({ customer, locale }: CustomerFormProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
+
+    if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
+      setError(t('missingEnv'));
+      setLoading(false);
+      return;
+    }
 
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
 
     if (!user) {
       router.push(`/${locale}/login`);
+      setLoading(false);
       return;
     }
 
@@ -51,10 +60,14 @@ export default function CustomerForm({ customer, locale }: CustomerFormProps) {
         })
         .eq('id', customer.id);
 
-      if (!error) {
-        router.push(`/${locale}/dashboard/customers`);
-        router.refresh();
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+        return;
       }
+
+      router.push(`/${locale}/dashboard/customers`);
+      router.refresh();
     } else {
       // Create new customer
       const { error } = await supabase
@@ -64,17 +77,21 @@ export default function CustomerForm({ customer, locale }: CustomerFormProps) {
           user_id: user.id,
         });
 
-      if (!error) {
-        // Send welcome email (basic automation)
-        await fetch('/api/automation/welcome-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: formData.email, name: formData.name }),
-        });
-
-        router.push(`/${locale}/dashboard/customers`);
-        router.refresh();
+      if (error) {
+        setError(error.message);
+        setLoading(false);
+        return;
       }
+
+      // Send welcome email (basic automation)
+      await fetch('/api/automation/welcome-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: formData.email, name: formData.name }),
+      });
+
+      router.push(`/${locale}/dashboard/customers`);
+      router.refresh();
     }
 
     setLoading(false);
@@ -82,6 +99,11 @@ export default function CustomerForm({ customer, locale }: CustomerFormProps) {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-100">
+          {error}
+        </div>
+      )}
       <div>
         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
           {t('name')}

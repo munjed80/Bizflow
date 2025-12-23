@@ -10,7 +10,8 @@
     "customers": "Klanten",
     "forms": "Formulieren",
     "automation": "Automatisering",
-    "settings": "Instellingen"
+    "settings": "Instellingen",
+    "home": "Home"
   },
   "auth": {
     "email": "E-mail",
@@ -22,12 +23,17 @@
     "signIn": "Inloggen",
     "signUp": "Registreren",
     "emailPlaceholder": "uw@email.com",
-    "passwordPlaceholder": "Voer wachtwoord in"
+    "passwordPlaceholder": "Voer wachtwoord in",
+    "missingEnv": "Supabase omgevingsvariabelen ontbreken."
   },
   "customer": {
     "title": "Klanten",
+    "manageCustomers": "Beheer je klantrelaties",
+    "description": "Voeg klanten toe, zoek en bewerk ze op één plek.",
     "addCustomer": "Klant Toevoegen",
     "editCustomer": "Klant Bewerken",
+    "createCustomer": "Nieuwe klant aanmaken",
+    "updateCustomer": "Klant bijwerken",
     "deleteCustomer": "Klant Verwijderen",
     "name": "Naam",
     "email": "E-mail",
@@ -39,23 +45,52 @@
     "actions": "Acties",
     "edit": "Bewerken",
     "delete": "Verwijderen",
+    "deleting": "Bezig met verwijderen...",
     "save": "Opslaan",
     "cancel": "Annuleren",
     "viewDetails": "Details Bekijken",
-    "customerDetails": "Klant Details"
+    "customerDetails": "Klant Details",
+    "searchPlaceholder": "Zoek op naam, e-mail of bedrijf",
+    "noCustomers": "Geen klanten gevonden",
+    "missingEnv": "Supabase omgevingsvariabelen ontbreken."
   },
   "dashboard": {
     "title": "Dashboard",
     "totalCustomers": "Totaal Klanten",
     "activeCustomers": "Actieve Klanten",
     "recentCustomers": "Recente Klanten",
-    "stats": "Statistieken"
+    "stats": "Statistieken",
+    "noCustomers": "Nog geen klanten.",
+    "addFirstCustomer": "Voeg je eerste klant toe"
   },
   "forms": {
     "title": "Slimme Formulieren",
+    "builderTitle": "Formulierbouwer",
+    "builderSubtitle": "Maak eenvoudige formulieren en verzamel reacties (MVP).",
     "createForm": "Formulier Maken",
     "formName": "Formulier Naam",
     "formDescription": "Formulier Beschrijving",
-    "required": "Dit veld is verplicht"
+    "formNamePlaceholder": "Bijv. Intake formulier",
+    "formDescriptionPlaceholder": "Korte beschrijving van het formulier",
+    "fields": "Velden",
+    "addField": "Veld toevoegen",
+    "fieldLabel": "Veldlabel",
+    "fieldType": "Veldtype",
+    "text": "Tekst",
+    "number": "Nummer",
+    "email": "E-mail",
+    "textarea": "Tekstvak",
+    "required": "Verplicht",
+    "remove": "Verwijderen",
+    "saveForm": "Formulier opslaan",
+    "saving": "Bezig met opslaan...",
+    "saved": "Formulier succesvol opgeslagen",
+    "preview": "Voorvertoning",
+    "existingForms": "Bestaande formulieren",
+    "noForms": "Nog geen formulieren.",
+    "comingSoon": "Automatiseringen en delen volgen snel.",
+    "missingEnv": "Supabase omgevingsvariabelen ontbreken.",
+    "authRequired": "Je moet ingelogd zijn om formulieren op te slaan.",
+    "newFieldLabel": "Veld {index}"
   }
 }
