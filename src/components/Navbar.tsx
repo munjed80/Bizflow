@@ -19,7 +19,6 @@ export default function Navbar({ locale }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const previousPathRef = useRef<string | null>(null);
-  const mobileOpenRef = useRef(false);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -33,14 +32,10 @@ export default function Navbar({ locale }: NavbarProps) {
   }, [supabaseKey, supabaseUrl]);
 
   useEffect(() => {
-    mobileOpenRef.current = mobileOpen;
-  }, [mobileOpen]);
-
-  useEffect(() => {
     if (previousPathRef.current === pathname) return;
     previousPathRef.current = pathname;
 
-    if (mobileOpenRef.current) {
+    if (mobileOpen) {
       setMobileOpen(false);
       mobileToggleRef.current?.focus();
     }
