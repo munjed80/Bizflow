@@ -22,7 +22,7 @@ export default function AuthHighlights({ heading }: AuthHighlightsProps) {
         <div className="flex items-start gap-3">
           <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/15">
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M5 12l4-4m-4 4 4 4" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M4 19h16M7 19V10m5 9V5m5 14v-7" />
             </svg>
           </span>
           <div>
