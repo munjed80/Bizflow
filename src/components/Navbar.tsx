@@ -16,6 +16,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -27,6 +28,10 @@ export default function Navbar({ locale }: NavbarProps) {
       setUserEmail(data.user?.email ?? null);
     });
   }, [supabaseKey, supabaseUrl]);
+
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   const navItems = useMemo(
     () => [
@@ -48,7 +53,7 @@ export default function Navbar({ locale }: NavbarProps) {
   return (
     <header className="bg-white/80 dark:bg-gray-900/70 backdrop-blur shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4">
           <Link href={`/${locale}/dashboard`} className="text-xl font-bold text-indigo-600 dark:text-indigo-300">
             {t('appName')}
           </Link>
@@ -68,14 +73,14 @@ export default function Navbar({ locale }: NavbarProps) {
             ))}
           </nav>
         </div>
-        <div className="flex items-center space-x-3">
+        <div className="flex items-center gap-2">
           <LanguageSwitcher />
           {userEmail ? (
             <>
               <span className="hidden text-sm text-gray-600 dark:text-gray-300 sm:inline">{userEmail}</span>
               <button
                 onClick={handleLogout}
-                className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+                className="hidden rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50 sm:inline"
               >
                 {t('logout')}
               </button>
@@ -96,8 +101,73 @@ export default function Navbar({ locale }: NavbarProps) {
               </Link>
             </div>
           )}
+          <button
+            type="button"
+            onClick={() => setMobileOpen((prev) => !prev)}
+            aria-expanded={mobileOpen}
+            aria-label="Toggle navigation"
+            className="inline-flex items-center justify-center rounded-md border border-gray-200 p-2 text-gray-600 transition hover:bg-gray-100 sm:hidden dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+          >
+            <span className="sr-only">Toggle navigation</span>
+            {mobileOpen ? (
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            )}
+          </button>
         </div>
       </div>
+      {mobileOpen && (
+        <div className="sm:hidden border-t border-gray-200 bg-white/90 px-4 pb-4 shadow-inner dark:border-gray-800 dark:bg-gray-900/90">
+          <nav className="flex flex-col gap-2 py-3 text-sm font-medium text-gray-700 dark:text-gray-200">
+            {navItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`rounded-md px-3 py-2 transition ${
+                  pathname === item.href
+                    ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-200'
+                    : 'hover:bg-indigo-50 dark:hover:bg-gray-800'
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="flex flex-col gap-2">
+            {userEmail ? (
+              <>
+                <span className="text-sm text-gray-600 dark:text-gray-300">{userEmail}</span>
+                <button
+                  onClick={handleLogout}
+                  className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+                >
+                  {t('logout')}
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href={`/${locale}/login`}
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-indigo-50 dark:text-gray-200 dark:hover:bg-gray-800"
+                >
+                  {t('login')}
+                </Link>
+                <Link
+                  href={`/${locale}/register`}
+                  className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700"
+                >
+                  {t('register')}
+                </Link>
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
