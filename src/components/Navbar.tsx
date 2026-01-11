@@ -35,7 +35,7 @@ export default function Navbar({ locale }: NavbarProps) {
       setMobileOpen(false);
       mobileToggleRef.current?.focus();
     }
-  }, [mobileOpen, pathname]);
+  }, [pathname]);
 
   const navItems = useMemo(
     () => [
