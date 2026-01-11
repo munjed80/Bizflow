@@ -6,9 +6,11 @@ import { useTranslations } from 'next-intl';
 import { createClient } from '@/lib/supabase/client';
 import Link from 'next/link';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import AuthHighlights from '@/components/AuthHighlights';
 
 export default function RegisterPage({ params }: { params: Promise<{ locale: string }> }) {
   const t = useTranslations('auth');
+  const tCommon = useTranslations('common');
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -56,76 +58,89 @@ export default function RegisterPage({ params }: { params: Promise<{ locale: str
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+    <div className="relative min-h-screen bg-gradient-to-br from-indigo-50 via-white to-blue-50 px-4 py-10 sm:px-6 lg:px-8">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/4 top-0 h-64 w-64 rounded-full bg-indigo-200 blur-3xl" />
+        <div className="absolute right-[-3rem] top-10 h-72 w-72 rounded-full bg-purple-200 blur-3xl" />
+        <div className="absolute bottom-0 left-10 h-40 w-40 rounded-full bg-blue-100 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-5xl">
         <div className="flex justify-end">
           <LanguageSwitcher />
         </div>
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            {t('registerTitle')}
-          </h2>
+
+        <div className="mt-6 grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div className="hidden lg:block">
+            <AuthHighlights heading={t('registerTitle')} />
+          </div>
+
+          <div className="rounded-3xl bg-white/80 p-8 shadow-xl backdrop-blur dark:bg-gray-900/80">
+            <div className="mb-6 space-y-2 text-center">
+              <p className="text-sm font-semibold text-indigo-600">{tCommon('welcome')}</p>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">{t('registerTitle')}</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{tCommon('tagline')}</p>
+            </div>
+
+            <form className="space-y-6" onSubmit={handleRegister}>
+              {error && (
+                <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800 dark:border-red-900/40 dark:bg-red-900/30 dark:text-red-100">
+                  {error}
+                </div>
+              )}
+
+              <div className="space-y-4">
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                    {t('email')}
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm shadow-sm outline-none ring-0 transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-indigo-400 dark:focus:ring-indigo-900/60"
+                    placeholder={t('emailPlaceholder')}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="password" className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                    {t('password')}
+                  </label>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="new-password"
+                    required
+                    className="w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm shadow-sm outline-none ring-0 transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 dark:focus:border-indigo-400 dark:focus:ring-indigo-900/60"
+                    placeholder={t('passwordPlaceholder')}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-3 text-sm font-semibold text-white shadow-lg transition hover:from-indigo-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-indigo-200 disabled:opacity-60"
+              >
+                {loading ? '...' : t('signUp')}
+              </button>
+
+              <p className="text-center text-sm text-gray-600 dark:text-gray-300">
+                {t('hasAccount')}{' '}
+                <Link href="./login" className="font-semibold text-indigo-600 hover:text-indigo-500 dark:text-indigo-300">
+                  {t('signIn')}
+                </Link>
+              </p>
+            </form>
+          </div>
         </div>
-        <form className="mt-8 space-y-6" onSubmit={handleRegister}>
-          {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <p className="text-sm text-red-800">{error}</p>
-            </div>
-          )}
-          <div className="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label htmlFor="email" className="sr-only">
-                {t('email')}
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder={t('emailPlaceholder')}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div>
-              <label htmlFor="password" className="sr-only">
-                {t('password')}
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                autoComplete="new-password"
-                required
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder={t('passwordPlaceholder')}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-            >
-              {loading ? '...' : t('signUp')}
-            </button>
-          </div>
-
-          <div className="text-center">
-            <p className="text-sm text-gray-600">
-              {t('hasAccount')}{' '}
-              <Link href="./login" className="font-medium text-indigo-600 hover:text-indigo-500">
-                {t('signIn')}
-              </Link>
-            </p>
-          </div>
-        </form>
       </div>
     </div>
   );
