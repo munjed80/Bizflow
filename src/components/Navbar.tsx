@@ -18,6 +18,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
+  const previousPathRef = useRef<string | null>(null);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -31,11 +32,14 @@ export default function Navbar({ locale }: NavbarProps) {
   }, [supabaseKey, supabaseUrl]);
 
   useEffect(() => {
+    if (previousPathRef.current === pathname) return;
+    previousPathRef.current = pathname;
+
     if (mobileOpen) {
       setMobileOpen(false);
       mobileToggleRef.current?.focus();
     }
-  }, [pathname]);
+  }, [mobileOpen, pathname]);
 
   const navItems = useMemo(
     () => [
