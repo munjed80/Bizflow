@@ -19,6 +19,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const previousPathRef = useRef<string | null>(null);
+  const mobileOpenRef = useRef(false);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -32,14 +33,18 @@ export default function Navbar({ locale }: NavbarProps) {
   }, [supabaseKey, supabaseUrl]);
 
   useEffect(() => {
+    mobileOpenRef.current = mobileOpen;
+  }, [mobileOpen]);
+
+  useEffect(() => {
     if (previousPathRef.current === pathname) return;
     previousPathRef.current = pathname;
 
-    if (mobileOpen) {
+    if (mobileOpenRef.current) {
       setMobileOpen(false);
       mobileToggleRef.current?.focus();
     }
-  }, [mobileOpen, pathname]);
+  }, [pathname]);
 
   const navItems = useMemo(
     () => [
@@ -94,7 +99,7 @@ export default function Navbar({ locale }: NavbarProps) {
               </button>
             </>
           ) : (
-            <div className="hidden items-center space-x-2 sm:flex">
+            <div className="hidden items-center gap-2 sm:flex">
               <Link
                 href={`/${locale}/login`}
                 className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition hover:bg-indigo-50 dark:text-gray-200 dark:hover:bg-gray-800"
