@@ -21,6 +21,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const previousPathRef = useRef<string | null>(null);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  const toggleLabel = mobileOpen ? t('closeMenu') : t('openMenu');
 
   useEffect(() => {
     if (!supabaseUrl || !supabaseKey) return;
@@ -39,7 +40,7 @@ export default function Navbar({ locale }: NavbarProps) {
       setMobileOpen(false);
       mobileToggleRef.current?.focus();
     }
-  }, [pathname]);
+  }, [mobileOpen, pathname]);
 
   const navItems = useMemo(
     () => [
@@ -113,7 +114,7 @@ export default function Navbar({ locale }: NavbarProps) {
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
             aria-expanded={mobileOpen}
-            aria-label="Toggle navigation"
+            aria-label={toggleLabel}
             aria-controls="mobile-nav"
             ref={mobileToggleRef}
             className="inline-flex items-center justify-center rounded-md border border-gray-200 p-2 text-gray-600 transition hover:bg-gray-100 sm:hidden dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"

@@ -7,6 +7,8 @@
     "register": "Register",
     "welcome": "Welcome",
     "tagline": "Simple CRM, smart forms, and automations in one place.",
+    "openMenu": "Open navigation menu",
+    "closeMenu": "Close navigation menu",
     "dashboard": "Dashboard",
     "customers": "Customers",
     "forms": "Forms",
