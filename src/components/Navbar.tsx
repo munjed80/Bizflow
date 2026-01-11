@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 
 interface NavbarProps {
@@ -17,6 +17,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const router = useRouter();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const mobileToggleRef = useRef<HTMLButtonElement>(null);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
@@ -30,8 +31,11 @@ export default function Navbar({ locale }: NavbarProps) {
   }, [supabaseKey, supabaseUrl]);
 
   useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+    if (mobileOpen) {
+      setMobileOpen(false);
+      mobileToggleRef.current?.focus();
+    }
+  }, [mobileOpen, pathname]);
 
   const navItems = useMemo(
     () => [
@@ -107,6 +111,7 @@ export default function Navbar({ locale }: NavbarProps) {
             aria-expanded={mobileOpen}
             aria-label="Toggle navigation"
             aria-controls="mobile-nav"
+            ref={mobileToggleRef}
             className="inline-flex items-center justify-center rounded-md border border-gray-200 p-2 text-gray-600 transition hover:bg-gray-100 sm:hidden dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
           >
             {mobileOpen ? (
