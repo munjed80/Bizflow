@@ -18,7 +18,7 @@ export default function Navbar({ locale }: NavbarProps) {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const mobileToggleRef = useRef<HTMLButtonElement>(null);
-  const wasMobileOpen = useRef(false);
+  const previousPathRef = useRef<string | null>(null);
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   const toggleLabel = useMemo(() => (mobileOpen ? t('closeMenu') : t('openMenu')), [mobileOpen, t]);
@@ -33,18 +33,13 @@ export default function Navbar({ locale }: NavbarProps) {
   }, [supabaseKey, supabaseUrl]);
 
   useEffect(() => {
-    wasMobileOpen.current = mobileOpen;
-  }, [mobileOpen]);
+    if (previousPathRef.current === pathname) return;
+    previousPathRef.current = pathname;
 
-  useEffect(() => {
-    if (!wasMobileOpen.current) return;
-    wasMobileOpen.current = false;
-
-    if (mobileOpen) {
-      setMobileOpen(false);
-      mobileToggleRef.current?.focus();
-    }
-  }, [pathname]);
+    if (!mobileOpen) return;
+    setMobileOpen(false);
+    mobileToggleRef.current?.focus();
+  }, [mobileOpen, pathname]);
 
   const navItems = useMemo(
     () => [
