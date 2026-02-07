@@ -12,12 +12,14 @@ function validateKvk(kvk: string | undefined): boolean {
 function validateBtwVat(btw: string | undefined): boolean {
   if (!btw) return true; // optional
   // Dutch BTW format: NL + 9 chars + B + 2 digits (e.g., NL123456789B01)
+  // Note: Input is normalized to uppercase before validation and storage
   return /^NL\d{9}B\d{2}$/.test(btw.toUpperCase());
 }
 
 function validateIban(iban: string | undefined): boolean {
   if (!iban) return true; // optional
   // Basic IBAN format check (2 letters + 2 digits + up to 30 alphanumeric)
+  // Note: Input is normalized to uppercase and spaces removed before validation and storage
   return /^[A-Z]{2}\d{2}[A-Z0-9]{1,30}$/.test(iban.toUpperCase().replace(/\s/g, ''));
 }
 

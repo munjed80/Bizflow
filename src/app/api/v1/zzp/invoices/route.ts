@@ -2,8 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from '@/lib/supabase/server';
 import { BusinessProfile, Invoice } from '@/types';
 
-// Helper: Load business profile or raise error
-export async function loadBusinessProfileOrRaise(userId: string, supabase: ReturnType<typeof createClient> extends Promise<infer T> ? T : never) {
+// Helper: Load business profile for the given user, returns null if not found
+async function getBusinessProfile(userId: string, supabase: ReturnType<typeof createClient> extends Promise<infer T> ? T : never) {
   const { data: profile, error } = await supabase
     .from('business_profiles')
     .select('*')
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Load business profile - REQUIRED before creating invoices
-    const profile = await loadBusinessProfileOrRaise(user.id, supabase);
+    const profile = await getBusinessProfile(user.id, supabase);
     
     if (!profile) {
       return NextResponse.json(
